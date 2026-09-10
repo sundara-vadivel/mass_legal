@@ -1,84 +1,126 @@
 "use client";
-import { useState } from "react";
 
-const CATEGORIES = [
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const AREAS = [
   {
-    label: "Litigation & Dispute Resolution",
-    items: [
-      { title: "Civil & Commercial Disputes", desc: "Contract disputes, debt recovery, and business litigation." },
-      { title: "Criminal Defense", desc: "Representation in criminal matters and legal defense." },
-      { title: "Writ Petitions", desc: "Constitutional remedies and writ proceedings." },
-      { title: "Arbitration Support", desc: "Alternative dispute resolution mechanisms." },
-      { title: "Property Law", desc: "Title disputes, ownership matters, and property litigation." },
-      { title: "Family Law", desc: "Matrimonial, custody, and family dispute matters." },
-      { title: "Human Rights", desc: "Advocacy and legal support in human rights matters." },
-    ],
+    title: "Civil Litigation",
+    detail: "Representing clients through disputes with precision and strategic clarity.",
   },
   {
-    label: "Corporate & Advisory",
-    items: [
-      { title: "Company Formation", desc: "Structuring and incorporation of business entities." },
-      { title: "Contracts & Agreements", desc: "Drafting, review, and negotiation of commercial contracts." },
-      { title: "Risk Assessment", desc: "Legal risk identification and mitigation strategies." },
-      { title: "Legal Documentation", desc: "Comprehensive documentation for business operations." },
-      { title: "Corporate Advisory", desc: "Strategic legal counsel for corporate governance." },
-      { title: "Consumer Law", desc: "Consumer protection matters and dispute resolution." },
-    ],
+    title: "Criminal Law",
+    detail: "Defending rights with rigorous preparation and ethical advocacy.",
   },
   {
-    label: "Real Estate & Compliance",
-    items: [
-      { title: "Title Verification", desc: "Property due diligence and title verification." },
-      { title: "Land Dispute Resolution", desc: "Resolution of property and land-related disputes." },
-      { title: "Registration Advisory", desc: "Guidance on property registration processes." },
-      { title: "Labour Law Compliance", desc: "Ensuring adherence to labour regulations." },
-      { title: "MSME Advisory", desc: "Legal advisory for micro, small & medium enterprises." },
-      { title: "Statutory Filings & Audits", desc: "Regulatory filings and legal compliance audits." },
-    ],
+    title: "Constitutional Law",
+    detail: "Writ petitions and matters engaging fundamental rights before the High Court.",
+  },
+  {
+    title: "Property & Real Estate",
+    detail: "Title disputes, documentation, and real estate transaction advisory.",
+  },
+  {
+    title: "Commercial Litigation",
+    detail: "Resolving business disputes with a practical, outcome-focused approach.",
+  },
+  {
+    title: "Contract Drafting",
+    detail: "Precise, enforceable agreements tailored to each client's objectives.",
+  },
+  {
+    title: "Arbitration & Mediation",
+    detail: "Efficient dispute resolution outside traditional courtroom litigation.",
+  },
+  {
+    title: "Consumer Protection",
+    detail: "Advocating for consumer rights against unfair trade practices.",
+  },
+  {
+    title: "Corporate Advisory",
+    detail: "Strategic legal counsel for corporate governance and compliance.",
+  },
+  {
+    title: "Human Rights",
+    detail: "Committed representation in matters of fundamental human dignity.",
   },
 ];
 
 export default function PracticeAreas() {
-  const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="py-24 px-6 md:px-16 border-b border-ink/10 bg-paper">
+    <section
+      id="practice"
+      className="relative bg-cream text-ink px-6 md:px-12 py-24 md:py-40"
+    >
       <div className="max-w-6xl mx-auto">
-        <p className="text-bronze uppercase tracking-widest text-sm mb-4 text-center">
-          What We Do
-        </p>
-        <h2 className="text-3xl md:text-5xl font-display font-medium mb-12 text-center text-ink">
-          Core Practice Areas
-        </h2>
+        <motion.span
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-sans text-xs tracking-[0.2em] uppercase text-ink/50"
+        >
+          03 — Practice Areas
+        </motion.span>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {CATEGORIES.map((cat, i) => (
-            <button
-              key={cat.label}
-              onClick={() => setActive(i)}
-              className={`px-5 py-2.5 rounded-sm text-sm tracking-wide border transition-colors duration-300 ${
-                active === i
-                  ? "bg-bronze text-paper border-bronze"
-                  : "border-ink/15 text-ink/60 hover:border-bronze/50 hover:text-bronze"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="mt-6 font-serif italic text-3xl md:text-5xl"
+        >
+          Where he practices.
+        </motion.h2>
 
-        {/* Items */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CATEGORIES[active].items.map((item, i) => (
-            <div
-              key={i}
-              className="border border-ink/10 rounded-sm p-6 hover:border-bronze/50 transition-colors duration-300"
+        <div className="mt-16">
+          {AREAS.map((area, i) => (
+            <motion.div
+              key={area.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.04 }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              className="group border-t border-ink/10 py-6 md:py-8 cursor-default"
             >
-              <h3 className="font-display text-xl text-ink mb-2">{item.title}</h3>
-              <p className="text-ink/60 text-sm leading-relaxed">{item.desc}</p>
-            </div>
+              <div className="flex items-baseline justify-between gap-6">
+                <div className="flex items-baseline gap-4 md:gap-8">
+                  <span className="font-sans text-xs text-ink/40 w-6">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-serif text-xl md:text-3xl group-hover:italic group-hover:text-ink transition-all">
+                    {area.title}
+                  </h3>
+                </div>
+                <motion.span
+                  animate={{ rotate: hovered === i ? 45 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="font-sans text-lg text-ink/40 shrink-0"
+                >
+                  +
+                </motion.span>
+              </div>
+
+              <AnimatePresence>
+                {hovered === i && (
+                  <motion.p
+                    initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                    animate={{ height: "auto", opacity: 1, marginTop: 12 }}
+                    exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="font-sans text-sm md:text-base text-ink/60 max-w-xl pl-10 md:pl-14 overflow-hidden"
+                  >
+                    {area.detail}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
+          <div className="border-t border-ink/10" />
         </div>
       </div>
     </section>

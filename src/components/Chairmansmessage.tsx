@@ -1,152 +1,56 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion } from "framer-motion";
 
 export default function ChairmansMessage() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const quoteRef = useRef<HTMLQuoteElement>(null);
-  const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Soft fade + rise for the whole chapter
-      gsap.from(sectionRef.current, {
-        opacity: 0.4,
-        y: 60,
-        duration: 1.4,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          end: "top 30%",
-          scrub: 1,
-        },
-      });
-
-      // Stagger the paragraphs
-      gsap.from(textRefs.current, {
-        y: 40,
-        opacity: 0,
-        duration: 1.1,
-        stagger: 0.18,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 65%",
-        },
-      });
-
-      // Signature line draw
-      gsap.from(".signature-line", {
-        scaleX: 0,
-        duration: 1.4,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: ".signature-block",
-          start: "top 80%",
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section
-      id="message"
-      ref={sectionRef}
-      className="relative min-h-screen py-32 md:py-40 px-6 md:px-16 bg-parchment border-b border-ink/5"
-    >
-      {/* Subtle vertical guide lines */}
-      <div className="absolute left-[8%] top-0 h-full w-px bg-ink/5 hidden lg:block" />
-      <div className="absolute right-[8%] top-0 h-full w-px bg-ink/5 hidden lg:block" />
-
+    <section className="relative bg-charcoal text-cream px-6 md:px-12 py-24 md:py-40">
       <div className="max-w-4xl mx-auto">
-        {/* Chapter label */}
-        <div className="flex items-center gap-4 mb-16">
-          <span className="font-display text-4xl text-bronze">II</span>
-          <div className="h-px flex-1 bg-ink/10" />
-          <p className="text-xs tracking-[0.3em] uppercase text-ink/40">
-            Chairman’s Message
-          </p>
-        </div>
+        <motion.span
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-sans text-xs tracking-[0.2em] uppercase text-gold"
+        >
+          A Word from the Chairman
+        </motion.span>
 
-        {/* Main content */}
-        <div className="space-y-10">
-          <p
-            ref={(el) => { textRefs.current[0] = el; }}
-            className="font-display text-3xl md:text-4xl lg:text-5xl text-ink leading-snug"
-          >
-            Justice is not a destination.
-            <br />
-            It is a discipline.
-          </p>
+        <motion.blockquote
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-8 font-serif italic text-2xl md:text-4xl leading-relaxed text-cream/90"
+        >
+          &ldquo;I believe justice is earned — not assumed. Every client who
+          walks through our doors carries a story that deserves discipline,
+          honesty, and relentless preparation in return. That is the standard
+          I hold myself and MASS Legal Associates to, in every matter, every
+          time.&rdquo;
+        </motion.blockquote>
 
-          <p
-            ref={(el) => { textRefs.current[1] = el; }}
-            className="text-ink/70 text-lg md:text-xl leading-relaxed max-w-3xl"
-          >
-            When I first entered the courtroom, I carried with me more than legal knowledge.
-            I carried the weight of fifteen years spent building, leading, and performing under pressure —
-            in boardrooms, on stages, and in the boxing ring. Every experience taught me the same truth:
-            excellence is never accidental.
-          </p>
-
-          <p
-            ref={(el) => { textRefs.current[2] = el; }}
-            className="text-ink/70 text-lg md:text-xl leading-relaxed max-w-3xl"
-          >
-            At MASS Legal Associates, we do not merely represent clients.
-            We stand with them. We prepare with the same intensity I once brought to the ring —
-            meticulous, strategic, and unflinching. Integrity is not a slogan here; it is the only
-            currency we accept.
-          </p>
-
-          <p
-            ref={(el) => { textRefs.current[3] = el; }}
-            className="text-ink/70 text-lg md:text-xl leading-relaxed max-w-3xl"
-          >
-            My promise is simple. Whether you come to us for litigation, corporate counsel,
-            or complex dispute resolution, you will receive clear thinking, honest advice,
-            and advocacy that never compromises on ethics. In a profession that often rewards
-            the loudest voice, we choose the most prepared one.
-          </p>
-
-          <blockquote
-            ref={quoteRef}
-            className="border-l-2 border-bronze pl-8 my-16"
-          >
-            <p className="font-display text-2xl md:text-3xl text-ink/80 italic leading-relaxed">
-              “Every challenge is an opportunity to demonstrate integrity, discipline,
-              and excellence — whether in the courtroom, the boardroom, or the sporting arena.”
-            </p>
-          </blockquote>
-        </div>
-
-        {/* Signature block */}
-        <div className="signature-block mt-20 flex flex-col md:flex-row md:items-end justify-between gap-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-14 flex items-center gap-6"
+        >
+          <div className="h-16 w-16 rounded-full bg-cream/10 border border-cream/20 flex items-center justify-center">
+            <span className="font-sans text-[10px] tracking-widest uppercase text-cream/40">
+              Sig.
+            </span>
+          </div>
           <div>
-            <div className="signature-line origin-left h-px w-48 bg-bronze mb-6" />
-            <p className="font-display text-2xl text-ink">Dr. Balaji Srinivasan</p>
-            <p className="text-bronze text-sm tracking-widest uppercase mt-1">
-              Advocate, Madras High Court
+            <p className="font-serif text-lg text-cream">
+              Dr. Balaji Srinivasan
             </p>
-            <p className="text-ink/50 text-sm mt-1">
+            <p className="font-sans text-xs tracking-widest uppercase text-cream/50">
               President, MASS Legal Associates
             </p>
           </div>
-
-          {/* Portrait placeholder – replace with real image later */}
-          <div className="w-40 h-52 bg-ink/5 border border-ink/10 flex items-center justify-center">
-            <span className="text-ink/30 text-xs tracking-widest uppercase text-center px-4">
-              Professional<br />Portrait
-            </span>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,74 +1,71 @@
 "use client";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+
+import { motion } from "framer-motion";
+
+const headline = ["DR. BALAJI", "SRINIVASAN"];
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(".hero-label", { y: 20, opacity: 0, duration: 0.9, delay: 0.15 })
-        .from(".hero-line1", { y: 60, opacity: 0, duration: 1.1 }, "-=0.5")
-        .from(".hero-line2", { y: 60, opacity: 0, duration: 1.1 }, "-=0.85")
-        .from(".hero-sub", { y: 20, opacity: 0, duration: 0.9 }, "-=0.6")
-        .from(".hero-cta", { y: 15, opacity: 0, duration: 0.8 }, "-=0.5")
-        .from(".hero-scroll", { opacity: 0, duration: 1 }, "-=0.3");
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={containerRef}>
-      <section
-        id="home"
-        className="relative min-h-screen flex flex-col items-center justify-center px-6 bg-parchment"
-      >
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-[12%] top-0 h-full w-px bg-ink/[0.05]" />
-          <div className="absolute right-[12%] top-0 h-full w-px bg-ink/[0.05]" />
-        </div>
-
-        <div className="relative z-10 text-center max-w-4xl">
-          <p className="hero-label text-bronze text-[11px] md:text-xs tracking-[0.4em] uppercase mb-10">
-            Advocate · Madras High Court · President
-          </p>
-
-          <h1 className="font-display font-medium text-ink leading-[0.92]">
-            <span className="hero-line1 block text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
-              Dr. Balaji
-            </span>
-            <span className="hero-line2 block text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-bronze mt-1">
-              Srinivasan
-            </span>
-          </h1>
-
-          <p className="hero-sub mt-8 text-ink/55 text-base md:text-lg tracking-wide">
-            Masters of Advocacy and Societal Support
-          </p>
-
-          <div className="hero-cta mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
-            
-             <a href="#contact"
-              className="px-9 py-3.5 bg-ink text-paper text-xs tracking-[0.2em] uppercase hover:bg-bronze transition-colors duration-300 interactive"
+    <section
+      id="top"
+      className="relative min-h-screen bg-charcoal text-cream flex flex-col justify-between overflow-hidden px-6 md:px-12 pt-32 pb-12"
+    >
+      <div className="flex-1 flex flex-col justify-center">
+        {headline.map((line, i) => (
+          <div key={line} className="overflow-hidden">
+            <motion.h1
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{
+                duration: 1,
+                delay: 0.2 + i * 0.12,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="font-serif font-light italic text-[13vw] md:text-[7vw] leading-[0.95] tracking-tight"
             >
-              Schedule Consultation
-            </a>
-            <a
-              href="#about"
-              className="text-xs tracking-[0.2em] uppercase text-ink/60 hover:text-bronze transition-colors interactive"
-            >
-              Learn More ↓
-            </a>
+              {line}
+            </motion.h1>
           </div>
-        </div>
+        ))}
 
-        <div className="hero-scroll absolute bottom-10 left-0 right-0 flex flex-col items-center gap-3">
-          <div className="w-10 h-px bg-bronze/60" />
-          <p className="text-[10px] tracking-[0.35em] uppercase text-ink/35">Scroll</p>
-        </div>
-      </section>
-    </div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="mt-8 max-w-md font-sans text-sm md:text-base text-cream/70 tracking-wide"
+        >
+          Advocate, Madras High Court — President, MASS Legal Associates.
+          Justice earned through integrity, discipline, and relentless
+          commitment.
+        </motion.p>
+      </div>
+
+      <div className="flex items-end justify-between">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="font-sans text-xs tracking-[0.2em] uppercase text-cream/50"
+        >
+          Est. Practice — 2020
+        </motion.span>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="flex flex-col items-center gap-2"
+        >
+          <span className="font-sans text-xs tracking-[0.2em] uppercase text-cream/50">
+            Scroll
+          </span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-8 bg-cream/40"
+          />
+        </motion.div>
+      </div>
+    </section>
   );
 }

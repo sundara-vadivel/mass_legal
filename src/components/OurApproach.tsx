@@ -1,47 +1,56 @@
 "use client";
 
-const STEPS = [
-  {
-    title: "Consultation",
-    desc: "A confidential first meeting to understand your case, objectives, and concerns.",
-  },
-  {
-    title: "Strategy & Assessment",
-    desc: "Meticulous legal research and risk assessment to shape the right approach.",
-  },
-  {
-    title: "Representation",
-    desc: "Diligent, ethical advocacy through every stage of proceedings.",
-  },
-  {
-    title: "Resolution",
-    desc: "Clear communication and outcomes aligned with your objectives.",
-  },
+import { motion } from "framer-motion";
+
+const COMPETENCIES = [
+  "Litigation Strategy",
+  "Court Advocacy",
+  "Legal Research",
+  "Corporate Advisory",
+  "Negotiation & Mediation",
+  "Public Speaking",
+  "Human Rights Advocacy",
+  "Strategic Planning",
+  "Client Relationship Management",
+  "Technology Integration",
 ];
 
 export default function OurApproach() {
   return (
-    <section className="py-24 px-6 md:px-16 border-b border-ink/10 bg-parchment">
+    <section className="relative bg-cream text-ink px-6 md:px-12 py-24 md:py-40">
       <div className="max-w-6xl mx-auto">
-        <p className="text-bronze uppercase tracking-widest text-sm mb-4 text-center">
-          How We Work
-        </p>
-        <h2 className="text-3xl md:text-5xl font-display font-medium mb-14 text-center text-ink">
-          Our Approach
-        </h2>
+        <motion.span
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-sans text-xs tracking-[0.2em] uppercase text-ink/50"
+        >
+          05 — Approach
+        </motion.span>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {STEPS.map((step, i) => (
-            <div
-              key={step.title}
-              className="border border-ink/10 rounded-sm p-6 hover:border-bronze/50 transition-colors duration-300"
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-6 font-serif italic text-3xl md:text-5xl max-w-2xl"
+        >
+          How he approaches every matter.
+        </motion.h2>
+
+        <div className="mt-16 flex flex-wrap gap-3 md:gap-4 max-w-4xl">
+          {COMPETENCIES.map((item, i) => (
+            <motion.span
+              key={item}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className="font-sans text-sm md:text-base border border-ink/15 rounded-full px-5 py-2.5 hover:bg-ink hover:text-cream hover:border-ink transition-colors cursor-default"
             >
-              <span className="font-display text-3xl text-bronze">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="font-display text-xl text-ink mt-4 mb-2">{step.title}</h3>
-              <p className="text-ink/60 text-sm leading-relaxed">{step.desc}</p>
-            </div>
+              {item}
+            </motion.span>
           ))}
         </div>
       </div>

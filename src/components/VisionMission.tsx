@@ -1,31 +1,78 @@
 "use client";
 
+import { motion } from "framer-motion";
+
+const PILLARS = [
+  {
+    label: "Mission",
+    text: "To deliver comprehensive legal services rooted in integrity, professionalism, and client-focused solutions.",
+  },
+  {
+    label: "Vision",
+    text: "To set a benchmark in the legal profession through ethical, innovative, client-centric representation.",
+  },
+  {
+    label: "Values",
+    text: "Accessible justice, legal awareness, professional ethics, and strategic advocacy in every matter.",
+  },
+];
+
 export default function VisionMission() {
   return (
-    <section className="py-24 px-6 md:px-16 border-b border-ink/10 bg-paper">
-      <div className="max-w-5xl mx-auto">
-        <p className="text-bronze uppercase tracking-widest text-sm mb-4 text-center">
-          Our Foundation
+    <section
+      id="legacy"
+      className="relative bg-charcoal text-cream px-6 md:px-12 py-24 md:py-40"
+    >
+      <div className="max-w-6xl mx-auto">
+        <motion.span
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-sans text-xs tracking-[0.2em] uppercase text-gold"
+        >
+          04 — MASS Legal Associates
+        </motion.span>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-8 font-serif italic text-3xl md:text-6xl leading-snug max-w-4xl"
+        >
+          A firm built on the belief that justice is earned, not assumed.
+        </motion.h2>
+
+        <p className="mt-8 max-w-2xl font-sans text-sm md:text-base text-cream/60 leading-relaxed">
+          As President of MASS Legal Associates, Dr. Balaji Srinivasan leads a
+          practice committed to accessible justice, legal awareness, and
+          strategic representation across a wide range of civil and criminal
+          matters.
         </p>
-        <h2 className="text-3xl md:text-5xl font-display font-medium mb-14 text-center text-ink">
-          Vision &amp; Mission
-        </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="border border-ink/10 rounded-sm p-8 hover:border-bronze/50 transition-colors duration-300">
-            <h3 className="font-display text-2xl text-bronze mb-3">Our Vision</h3>
-            <p className="text-ink/70 text-base leading-relaxed">
-              To be a trusted legal partner known for strategic clarity and ethical advocacy.
-            </p>
-          </div>
-
-          <div className="border border-ink/10 rounded-sm p-8 hover:border-bronze/50 transition-colors duration-300">
-            <h3 className="font-display text-2xl text-bronze mb-3">Our Mission</h3>
-            <p className="text-ink/70 text-base leading-relaxed">
-              To protect client interests through structured legal planning, effective
-              representation, and preventive legal strategies.
-            </p>
-          </div>
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          {PILLARS.map((pillar, i) => (
+            <motion.div
+              key={pillar.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{
+                duration: 0.7,
+                delay: i * 0.12,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="border-t border-cream/15 pt-6"
+            >
+              <span className="font-sans text-xs tracking-[0.2em] uppercase text-gold">
+                {pillar.label}
+              </span>
+              <p className="mt-4 font-serif text-lg md:text-xl text-cream/90 leading-relaxed">
+                {pillar.text}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
