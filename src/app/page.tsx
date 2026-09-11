@@ -21,7 +21,6 @@ export default function Home() {
       <VisionMission/>
       <OurApproach/>
       <Achievements/>
-      <ChapterWipe title="let's talk"/>
       <Contact/>
     </main>
   );
