@@ -5,23 +5,32 @@ import ChairmansMessage from "@/components/Chairmansmessage";
 import Journey from "@/components/Journey";
 import PracticeAreas from "@/components/PracticeAreas";
 import VisionMission from "@/components/VisionMission";
-import Achievements from "@/components/Achievements";
-import ChapterWipe from "@/components/ChapterWipe";
-import Contact from "@/components/Contact";
 import OurApproach from "@/components/OurApproach";
+import Achievements from "@/components/Achievements";
+import Contact from "@/components/Contact";
+import SeamPin from "@/components/SeamPin";
+
 export default function Home() {
   return (
     <main>
       <Nav />
       <Hero />
       <About />
-      <ChairmansMessage />
-      <Journey/>
-      <PracticeAreas/>
-      <VisionMission/>
-      <OurApproach/>
-      <Achievements/>
-      <Contact/>
+      <SeamPin
+        bufferVh={70}
+        stageClassName="bg-charcoal"
+        outgoing={<ChairmansMessage />}
+        incoming={<Journey />}
+      />
+      <PracticeAreas />
+      <VisionMission />
+      <SeamPin
+        bufferVh={70}
+        stageClassName="bg-cream"
+        outgoing={<OurApproach />}
+        incoming={<Achievements />}
+      />
+      <Contact />
     </main>
   );
 }
