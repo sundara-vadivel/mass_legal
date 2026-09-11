@@ -8,8 +8,6 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null!);
   const prefersReducedMotion = useReducedMotion();
 
-  // Reveal finishes at 35% into the section entering view, leaving the
-  // rest of the scroll to just read the content normally.
   const progress = useSectionProgress(sectionRef, ["start end", "start 0.35"]);
 
   const x = useTransform(progress, [0, 1], [140, 0]);
@@ -30,9 +28,18 @@ export default function About() {
         style={style}
         className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 will-change-transform"
       >
-        <span className="md:col-span-3 font-sans text-xs tracking-[0.2em] uppercase text-ink/50">
-          01 — About
-        </span>
+        {/* Left rail: label + portrait, filling the column's empty space */}
+        <div className="md:col-span-3 flex flex-col">
+          <span className="font-sans text-xs tracking-[0.2em] uppercase text-ink/50">
+            01 — About
+          </span>
+
+          <div className="mt-8 aspect-[4/5] w-full max-w-[220px] bg-cream-soft border border-ink/10 flex items-center justify-center">
+            <span className="font-sans text-xs tracking-[0.2em] uppercase text-ink/30 text-center px-4">
+              Portrait — placeholder
+            </span>
+          </div>
+        </div>
 
         <div className="md:col-span-9">
           <p className="font-serif text-3xl md:text-5xl leading-snug">
@@ -54,12 +61,6 @@ export default function About() {
               Tamil Nadu as a national-medal boxer — experience that shapes
               his strategic, disciplined approach to advocacy today.
             </p>
-          </div>
-
-          <div className="mt-14 aspect-[4/5] w-full max-w-sm bg-cream-soft border border-ink/10 flex items-center justify-center">
-            <span className="font-sans text-xs tracking-[0.2em] uppercase text-ink/30">
-              Portrait — placeholder
-            </span>
           </div>
         </div>
       </motion.div>
