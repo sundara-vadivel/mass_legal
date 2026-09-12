@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, useTransform } from "framer-motion";
 import { useSectionProgress } from "@/lib/motion";
 
@@ -8,36 +9,41 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null!);
   const prefersReducedMotion = useReducedMotion();
 
-  const progress = useSectionProgress(sectionRef, ["start end", "start 0.35"]);
+  const progress = useSectionProgress(sectionRef);
 
-  const x = useTransform(progress, [0, 1], [140, 0]);
-  const scale = useTransform(progress, [0, 1], [0.94, 1]);
-  const opacity = useTransform(progress, [0, 1], [0, 1]);
-  const blurValue = useTransform(progress, [0, 0.7], [10, 0]);
+  const OVERLAP_VH = 66;
+
+  const x = useTransform(progress, [0, 1], ["100%", "0%"]);
+  const opacity = useTransform(progress, [0, 0.4, 1], [0, 1, 1]);
+  const blurValue = useTransform(progress, [0, 0.5], [14, 0]);
   const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
 
-  const style = prefersReducedMotion ? undefined : { x, scale, opacity, filter };
+  const style = prefersReducedMotion ? undefined : { x, opacity, filter };
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="relative bg-cream text-ink px-6 md:px-12 py-24 md:py-40 overflow-hidden"
+      style={prefersReducedMotion ? undefined : { marginTop: `-${OVERLAP_VH}vh` }}
+      className="relative z-[45] bg-cream text-ink px-6 md:px-12 py-24 md:py-40 overflow-hidden"
     >
       <motion.div
         style={style}
         className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 will-change-transform"
       >
-        {/* Left rail: label + portrait, filling the column's empty space */}
         <div className="md:col-span-3 flex flex-col">
           <span className="font-sans text-xs tracking-[0.2em] uppercase text-ink/50">
             01 — About
           </span>
 
-          <div className="mt-8 aspect-[4/5] w-full max-w-[220px] bg-cream-soft border border-ink/10 flex items-center justify-center">
-            <span className="font-sans text-xs tracking-[0.2em] uppercase text-ink/30 text-center px-4">
-              Portrait — placeholder
-            </span>
+          <div className="mt-8 relative aspect-[2/3] w-full max-w-[220px] overflow-hidden rounded-sm border border-ink/10 bg-cream-soft">
+            <Image
+              src="/images/balaji-portrait.jpeg"
+              alt="Dr. Balaji Srinivasan, Advocate, Madras High Court"
+              fill
+              sizes="(min-width: 768px) 220px, 60vw"
+              className="object-cover object-top"
+            />
           </div>
         </div>
 
