@@ -38,7 +38,7 @@ export default function About() {
 
           <div className="mt-8 relative aspect-[2/3] w-full max-w-[220px] overflow-hidden rounded-sm border border-ink/10 bg-cream-soft">
             <Image
-              src="/images/balaji-portrait.PNG"
+              src="/images/Final.jpeg"
               alt="Dr. Balaji Srinivasan, Advocate, Madras High Court"
               fill
               sizes="(min-width: 768px) 220px, 60vw"

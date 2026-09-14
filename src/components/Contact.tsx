@@ -47,15 +47,15 @@ export default function Contact() {
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-3xl border-t border-cream/15 pt-10">
           <div>
             <span className="font-sans text-xs tracking-[0.2em] uppercase text-cream/40">Email</span>
-            <p className="mt-2 font-serif text-lg">contact@masslegal.in</p>
+            <p className="mt-2 font-serif text-lg">masslegalassociates@gmail.com</p>
           </div>
-          <div>
+          <div className="sm:ml-8">
             <span className="font-sans text-xs tracking-[0.2em] uppercase text-cream/40">Phone</span>
-            <p className="mt-2 font-serif text-lg">+91 00000 00000</p>
+            <p className="mt-2 font-serif text-lg">+91 99622 88881</p>
           </div>
           <div>
-            <span className="font-sans text-xs tracking-[0.2em] uppercase text-cream/40">Chambers</span>
-            <p className="mt-2 font-serif text-lg">Madras High Court, Chennai</p>
+            <span className="font-sans text-xs tracking-[0.2em] uppercase text-cream/40">Location</span>
+            <p className="mt-2 font-serif text-lg">53/2, Burkit Road, T.Nagar, Chennai 600017</p>
           </div>
         </div>
       </motion.div>
